@@ -5,6 +5,7 @@ export enum test_kind_enum {
 }
 
 export interface test_object {
+    id: string,
     file_url: string, 
     insert_date: Date,
     nendo: number,

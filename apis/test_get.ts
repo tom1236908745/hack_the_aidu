@@ -9,7 +9,7 @@ export const test_get = async (subject: string, field: string, kind: test_kind_e
     const return_ary = []
     // const snapshot = await citiesRef.where('capital', '==', true).get();
     data.forEach(doc => {
-        return_ary.push(doc.data())
+        return_ary.push({ ...doc.data(), id: doc.id })
     })
 
     return return_ary
