@@ -1,8 +1,5 @@
 # hack the aidu
 
-# environment
-
-.env.local
 
 # deploy 
 

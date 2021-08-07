@@ -1,20 +1,3 @@
-// components
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
-// css
-import '../styles/globals.css'
-
-function MyApp({ Component, pageProps }) {
-
-  const queryClient: QueryClient = new QueryClient()
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
-  )
-}
-
-export default MyApp
-
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -27,13 +10,32 @@ import MenuIcon from '@material-ui/icons/Menu';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      width: "100vw"
+    },
+    flex: {
+      flex: 1
     },
     menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
+      marginLeft: -12,
+      marginRight: 20
+    }
   }),
 );
+
+export default function ButtonAppBar() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">
+            New Item
+          </Typography>
+
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}
