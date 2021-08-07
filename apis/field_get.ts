@@ -1,7 +1,8 @@
+import db from "./firebase"
+
 export const field_get = async () => {
-
-    // TODO: フィールドのデータをとってくる
     // ["c1-c2", "c3-c4", "sy"]: Array<string>
-
-    return ["c1-c2", "c3-c4", "sy"]
+    const ref = db.collection("field").doc("field")
+    const data = await ref.get()
+    return data.data().field
 }
