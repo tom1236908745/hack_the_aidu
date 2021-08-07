@@ -1,7 +1,10 @@
+import db from "./firebase"
+
 export const subjects_get = async () => {
-
-    // TODO: 教科の全てのデータをとってくる
     // ["ie3", "fu04", "cn02"]: Array<string>
+    const ref = db.collection("subject").doc("subject")
 
-    return ["ie3", "fu04", "cn02"]
+    const data = await ref.get()
+
+    return data.data().subject
 }
