@@ -1,7 +1,8 @@
 export enum test_kind_enum {
     kimatsu,
     chukan,
-    taisaku
+    taisaku,
+    report
 }
 
 export interface test_object {

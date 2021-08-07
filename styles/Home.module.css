@@ -9,12 +9,57 @@
 }
 
 .main {
-  padding: 5rem 0;
+  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.flexerow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexercol {
+  display: flex;
+  flex-direction: row;
+}
+
+.textcenter {
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.ml {
+  margin-right: 32px;
+}
+
+.boxboxer {
+  padding: 32px;
+  margin: 32px;
+  border-radius: 32px;
+  background-color: #eaeaea;
+}
+
+.boxboxergo {
+  padding: 32px;
+  border-radius: 32px;
+  background-color:rgb(173, 197, 240);
+}
+
+.boxboxergo2 {
+  padding: 8px;
+  border-radius: 8px;
+  background-color:rgb(173, 197, 240);
+}
+
+.marg {
+  margin: 32px;
+}
+
+.clickme {
+  cursor: pointer;
 }
 
 .footer {
@@ -65,8 +110,8 @@
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+    monospace;
 }
 
 .grid {
