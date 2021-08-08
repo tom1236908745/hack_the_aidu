@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { useMutation } from 'react-query'
+import React, { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query'
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import {test_fix} from '../apis/test_fix'
+import { test_fix } from '../apis/test_fix'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -62,13 +62,13 @@ const DialogActions = withStyles((theme: Theme) => ({
 export default function EditDialogs(props) {
   const [open, setOpen] = useState(false);
   const [newUrl, setNewUrl] = useState('');
-
   const {
     mutate: post_test_mutation,
     isLoading: mutateIsLoading
-  } = useMutation((_) => test_fix(props.test),{
+  } = useMutation((data: any) => test_fix(data), {
     onSuccess: () => {
-      alert("success")
+      props.fetch_test_mutation()
+      
     },
     onError: () => {
       alert("failed")
@@ -79,8 +79,9 @@ export default function EditDialogs(props) {
     setOpen(true);
   };
   const handleSave = () => {
-    props.test.file_url = newUrl
-    /* post_test_mutation() */
+    let new_test = Object.assign({}, props.test)
+    new_test.file_url = newUrl
+    post_test_mutation(new_test)
     console.log(props.test.file_url)
     setOpen(false);
   };
