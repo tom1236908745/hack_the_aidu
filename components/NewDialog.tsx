@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,7 +8,8 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-
+import SelectLabels from './SelectLabels'
+import {test_kind_enum} from '../interfaces/test_get_type'
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -28,6 +29,19 @@ export interface DialogTitleProps extends WithStyles<typeof styles> {
   children: React.ReactNode;
   onClose: () => void;
 }
+
+
+
+const types = ["期末", "中間", "対策", "レポート"]
+// TODO: est_post(id,file_url, insert_date, nendo, kind, field, subject)
+
+/* const [id, setid] = useState<string>(null)
+const [fileUrl, setFileUrl] = useState<string>(null)
+const [insertDate, setInsertDate] = useState<Date>(null)
+const [nendo, setNendo] = useState<number>(0)
+const [kind, setKind] = useState<test_kind_enum>(null)
+const [field, setField] = useState<string>(null)
+const [subject, setSubject] = useState<string>(null) */
 
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
@@ -56,7 +70,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs() {
+export default function NewDialogs() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -69,26 +83,13 @@ export default function CustomizedDialogs() {
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
-        新規作成
+        編集
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+          編集
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
-          </Typography>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">

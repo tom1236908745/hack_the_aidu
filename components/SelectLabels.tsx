@@ -5,7 +5,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 
 export default function SelectLabels(props) {
 
-  const items = props.items.map((item, k) =>
+  const itemz = props.items.map((item, k) =>
     <option key={k} value={item}>{item}</option>
   )
   return (
@@ -13,7 +13,7 @@ export default function SelectLabels(props) {
       <FormControl fullWidth>
         <NativeSelect onChange={props.onChange} value={props.value}
         >
-          {items}
+          {itemz}
         </NativeSelect>
       </FormControl>
     </Box>
