@@ -29,11 +29,13 @@ const useStyles = makeStyles({
 // ];
 
 export interface data_table_type {
+
   test: any,
   fetch_test_mutation: any
 }
 
 export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
+
 
 
   const classes = useStyles();
@@ -58,7 +60,9 @@ export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
                 <a href={test.file_url}>{test.file_url}</a>
               </TableCell>
               <TableCell align="right">
+
                 <EditDialog test={test} fetch_test_mutation={fetch_test_mutation} />
+
               </TableCell>
             </TableRow>
           ))}

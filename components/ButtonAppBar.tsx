@@ -5,7 +5,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { IconButton } from '@material-ui/core';
-import NewDialog from './NewDialog'
+import NewSubjectDialog from './NewSubjectDialog'
+import NewTestDialog from './NewTestDialog'
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,7 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100wv"
     },
     buttons: {
-      justifyContent: 'flex-end'
+      display: "flex",
+      alignItems: "stretch"
+    },
+    spaceRight: {
+      marginRight: "1rem"
     }
   }),
 );
@@ -38,9 +44,11 @@ export default function ButtonAppBar() {
         <Typography variant="h6" className={classes.title}>
           hack the aidu
         </Typography>
-        <NewDialog />
-        <Button color="inherit" className={classes.buttons}>科目追加</Button>
-        <Button color="inherit" className={classes.buttons}>資料追加</Button>
+        <div className={classes.buttons}>
+          <NewSubjectDialog/>
+          <span className={classes.spaceRight} />
+          <NewTestDialog />
+        </div>
       </Toolbar>
     </AppBar>
   );

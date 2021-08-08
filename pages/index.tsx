@@ -154,50 +154,6 @@ export default function Home() {
             </div>
           </div>
 
-
-          {/* {
-            tests.map((obj: test_object, key: number) => {
-              return (
-                <div key={key} className={styles.boxboxer}>
-                  <div className={styles.flexercol}>
-                    <div className={styles.textcenter}>
-                      <div className={styles.ml}>
-                        {obj.nendo} {types[obj.kind]}
-                      </div>
-                    </div>
-
-                    <Button className={styles.clickme}>
-                      <div
-                        className={styles.boxboxergo2}
-                        onClick={() => {
-                          alert("新たなリンクを受け取ってtest_fix()する")
-                        }}>
-                        <div className={styles.flexercol}>
-                          <div className={styles.textcenter}>
-                            リンク更新
-                          </div>
-                        </div>
-                      </div>
-                    </Button>
-
-                    <Button className={styles.clickme}>
-                      <div
-                        className={styles.boxboxergo2}
-                        onClick={() => {
-                          setGo(obj.file_url)
-                        }}>
-                        <div className={styles.flexercol}>
-                          <div className={styles.textcenter}>
-                            遷移
-                          </div>
-                        </div>
-                      </div>
-                    </Button>
-                  </div>
-                </div>
-              )
-            })
-          } */}
           <DataTable test={tests} fetch_test_mutation={fetch_test_mutation} />
         </main>
 
