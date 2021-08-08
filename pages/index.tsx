@@ -14,6 +14,7 @@ import { test_object } from '../interfaces/test_get_type'
 import { useRouter } from 'next/router'
 import DataTable from '../components/DataTable'
 
+
 export const goRouter = () => {
 
   const [goPath, setGoPath] = useState<string>(null)
@@ -152,7 +153,7 @@ export default function Home() {
               </Button>
             </div>
           </div>
-
+          
 
           {
             tests.map((obj: test_object, key: number) => {
@@ -216,7 +217,7 @@ export default function Home() {
           }
         </h1> */}
         </main>
-        <DataTable />
+        {/* <DataTable tests="tests"/> */}
       </div>
     </>
   )
