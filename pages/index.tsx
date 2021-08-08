@@ -6,13 +6,13 @@ import { field_get } from '../apis/field_get'
 import { subjects_get } from '../apis/subjects_get'
 import styles from '../styles/Home.module.css'
 import SelectLabels from '../components/SelectLabels'
-import Header from '../components/Header'
 import ButtonAppBar from '../components/ButtonAppBar'
 import { Button } from '@material-ui/core'
 import { test_post } from '../apis/test_post'
 import { test_get } from '../apis/test_get'
 import { test_object } from '../interfaces/test_get_type'
 import { useRouter } from 'next/router'
+import DataTable from '../components/DataTable'
 
 export const goRouter = () => {
 
@@ -49,7 +49,7 @@ export default function Home() {
 
   const { data: subjects_data, isLoading: subjects_isLoading } = useQuery('subjects_get', () =>
     subjects_get())
-
+  
   const { data: field_data, isLoading: field_isLoading } = useQuery('field_get', () =>
     field_get())
 
@@ -61,7 +61,6 @@ export default function Home() {
     onSuccess: (res) => {
       // // メインページに遷移
       setTest(res)
-      console.log(res);
 
     },
     onError: (errorMessage: string) => {
@@ -103,7 +102,6 @@ export default function Home() {
 
         <main className={styles.main}>
           <div className={styles.flexerow}>
-
             <div className={styles.boxboxer}>
               <div className={styles.flexercol}>
                 <div className={styles.textcenter}>
@@ -218,7 +216,7 @@ export default function Home() {
           }
         </h1> */}
         </main>
-
+        <DataTable />
       </div>
     </>
   )
