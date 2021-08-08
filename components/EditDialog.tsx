@@ -92,8 +92,8 @@ export default function EditDialogs(props) {
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
         編集
       </Button>
-      <Dialog onClose={handleSave} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleSave}>
+      <Dialog onClose={() => setOpen(false)} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}>
           リンク編集
         </DialogTitle>
         <DialogContent dividers>
