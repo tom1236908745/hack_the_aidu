@@ -8,6 +8,7 @@ import { IconButton } from '@material-ui/core';
 import NewSubjectDialog from './NewSubjectDialog'
 import NewTestDialog from './NewTestDialog'
 
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -48,8 +49,6 @@ export default function ButtonAppBar() {
           <span className={classes.spaceRight} />
           <NewTestDialog />
         </div>
-        
-        
       </Toolbar>
     </AppBar>
   );
