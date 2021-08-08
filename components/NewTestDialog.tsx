@@ -81,7 +81,7 @@ export default function NewSubjectDialogs() {
 
   const [select__fileUrl, setSelect_fileUrl] = useState<string>(null)
   const [select__nendo, setSelects_nendo] = useState<number>(2021)
-  const types = ["期末", "中間", "対策", "レポート"]
+  const types = ["期末", "中間", "対策", "レポート", "集約フォルダ"]
   const [select__type_data, setSelect_type_data] = useState<number>(0)
   const [select__field_data, setSelect_field_data] = useState<string>("c1-c2")
   const [select__subject_data, setSelect_subject_data] = useState<string>("fu09")

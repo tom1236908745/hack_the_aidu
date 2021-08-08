@@ -2,7 +2,8 @@ export enum test_kind_enum {
     kimatsu,
     chukan,
     taisaku,
-    report
+    report,
+    folder
 }
 
 export interface test_object {

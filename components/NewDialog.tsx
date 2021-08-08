@@ -32,7 +32,7 @@ export interface DialogTitleProps extends WithStyles<typeof styles> {
 
 
 
-const types = ["期末", "中間", "対策", "レポート"]
+const types = ["期末", "中間", "対策", "レポート", "集約フォルダ"]
 // TODO: est_post(id,file_url, insert_date, nendo, kind, field, subject)
 
 /* const [id, setid] = useState<string>(null)

@@ -37,7 +37,7 @@ export default function Home() {
 
   const [subject, setSubject] = useState<string[]>([])
   const [field, setField] = useState<string[]>([])
-  const types = ["期末", "中間", "対策", "レポート"]
+  const types = ["期末", "中間", "対策", "レポート", "集約フォルダ"]
 
   const [search__subject_data, setSearch_subject_data] = useState<string>("fu09")
   const [search__field_data, setSearch_field_data] = useState<string>("c1-c2")
