@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { IconButton } from '@material-ui/core';
-import CustomizedDialogs from '../components/CustomizedDialogs'
+import NewDialog from './NewDialog'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,7 +38,7 @@ export default function ButtonAppBar() {
         <Typography variant="h6" className={classes.title}>
           hack the aidu
         </Typography>
-        <CustomizedDialogs />
+        <NewDialog />
         <Button color="inherit" className={classes.buttons}>科目追加</Button>
         <Button color="inherit" className={classes.buttons}>資料追加</Button>
       </Toolbar>

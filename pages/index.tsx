@@ -51,7 +51,7 @@ export default function Home() {
 
   const { data: subjects_data, isLoading: subjects_isLoading } = useQuery('subjects_get', () =>
     subjects_get())
-  
+
   const { data: field_data, isLoading: field_isLoading } = useQuery('field_get', () =>
     field_get())
 
@@ -63,7 +63,6 @@ export default function Home() {
     onSuccess: (res) => {
       // // メインページに遷移
       setTest(res)
-
     },
     onError: (errorMessage: string) => {
       alert("failed")
@@ -154,9 +153,9 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          
 
-          {
+
+          {/* {
             tests.map((obj: test_object, key: number) => {
               return (
                 <div key={key} className={styles.boxboxer}>
@@ -198,27 +197,10 @@ export default function Home() {
                 </div>
               )
             })
-          }
-          {/* <h1 className={styles.title}>
-          {
-            subject.map((st: string, key: number) => {
-              return (
-                <div key={key}>{st}</div>
-              )
-            })
-          }
-        </h1>
-        <h1 className={styles.title}>
-          {
-            field.map((st: string, key: number) => {
-              return (
-                <div key={key}>{st}</div>
-              )
-            })
-          }
-        </h1> */}
+          } */}
+          <DataTable test={tests} />
         </main>
-        {/* <DataTable tests="tests"/> */}
+
       </div>
     </>
   )
