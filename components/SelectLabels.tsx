@@ -4,9 +4,9 @@ import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 export default function SelectLabels(props) {
-  
-  const items = props.items.map((item, k) => 
-    <option value={item}>{item}</option>
+
+  const items = props.items.map((item, k) =>
+    <option key={k} value={item}>{item}</option>
   )
   return (
     <Box sx={{ minWidth: 120 }}>

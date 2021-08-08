@@ -15,7 +15,8 @@ import { useRouter } from 'next/router'
 import DataTable from '../components/DataTable'
 
 
-export const goRouter = () => {
+export const GoRouter = () => {
+
 
   const [goPath, setGoPath] = useState<string>(null)
 
@@ -44,7 +45,7 @@ export default function Home() {
 
   const [tests, setTest] = useState<any>([])
 
-  const setGo = goRouter()
+  const setGo = GoRouter()
 
   // react query
 
