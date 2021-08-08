@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { useMutation } from 'react-query';
+import React, { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,10 +9,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import SelectLabels from './SelectLabels'
-import {test_kind_enum} from '../interfaces/test_get_type'
-import {field_patch} from '../apis/subjects_post'
-import { subjects_get } from '../apis/subjects_get'
+import { subject_patch } from '../apis/subjects_post'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -63,10 +60,11 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function NewSubjectDialogs() {
-  
+export default function NewSubjectDialogs(props) {
+
 
   const [new__subject_data, setNew_subject_data] = useState<string>("")
+  const queryClient = useQueryClient()
 
 
   const [open, setOpen] = React.useState(false);
@@ -74,9 +72,9 @@ export default function NewSubjectDialogs() {
   const {
     mutate: new_field_mutation,
     isLoading: mutateIsLoading
-  } = useMutation((data: any) => field_patch(data), {
+  } = useMutation((data: any) => subject_patch(data), {
     onSuccess: () => {
-      alert("success")
+      props.subjects_remove()
     },
     onError: (errorMessage: string) => {
       alert("failed")
@@ -87,10 +85,10 @@ export default function NewSubjectDialogs() {
     setOpen(true);
   };
   const handleSave = () => {
-    new_field_mutation(new__subject_data)
-    setOpen(false);
+    new__subject_data !== "" && new_field_mutation(new__subject_data)
+    setOpen(false)
   };
-  const handlerSubject = e => setNew_subject_data(e.target.data);
+  const handlerSubject = e => setNew_subject_data(e.target.value);
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
@@ -101,11 +99,12 @@ export default function NewSubjectDialogs() {
           科目追加
         </DialogTitle>
         <DialogContent dividers>
+          <h3> 科目</h3>
           <input value={new__subject_data} onChange={handlerSubject} />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleSave} color="primary">
-            Save changes
+            保存
           </Button>
         </DialogActions>
       </Dialog>

@@ -49,7 +49,7 @@ export default function Home() {
 
   // react query
 
-  const { data: subjects_data, isLoading: subjects_isLoading } = useQuery('subjects_get', () =>
+  const { data: subjects_data, isLoading: subjects_isLoading, remove: subjects_remove } = useQuery('subjects_get', () =>
     subjects_get())
 
   const { data: field_data, isLoading: field_isLoading } = useQuery('field_get', () =>
@@ -93,7 +93,7 @@ export default function Home() {
   return (
 
     <>
-      <ButtonAppBar />
+      <ButtonAppBar subjects_remove={subjects_remove}/>
       <div className={styles.container}>
         <Head>
           <title>hack the aidu</title>

@@ -7,8 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { test_object } from '../interfaces/test_get_type'
 import EditDialog from '../components/EditDialog'
+import { Button } from '@material-ui/core';
+import { useMutation } from 'react-query';
+import { test_fix } from '../apis/test_fix';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -36,9 +38,24 @@ export interface data_table_type {
 
 export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
 
+  const classes = useStyles()
+
+  const {
+    mutate: post_delete_test_mutation,
+    isLoading: mutateIsLoading
+  } = useMutation((data: any) => test_fix(data), {
+    onSuccess: () => {
+      fetch_test_mutation()
+    },
+  })
+
+  const handleSave = (test) => {
+    let new_test = Object.assign({}, test)
+    new_test.delete_flg = true
+    post_delete_test_mutation(new_test)
+  }
 
 
-  const classes = useStyles();
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -52,20 +69,29 @@ export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {test.map((test) => (
-            <TableRow key={test.insert_date}>
-              <TableCell align="right">{test.nendo}</TableCell>
-              <TableCell align="right">{test.insert_date.toString()}</TableCell>
-              <TableCell align="right">
-                <a href={test.file_url}>{test.file_url}</a>
-              </TableCell>
-              <TableCell align="right">
+          {test.map((test) => {
+            if (!test.delete_flg) return (
+              <TableRow key={test.insert_date}>
+                <TableCell align="right">{test.nendo}</TableCell>
+                <TableCell align="right">{test.insert_date.toString()}</TableCell>
+                <TableCell align="right">
+                  <a href={test.file_url}>{test.file_url}</a>
+                </TableCell>
+                <TableCell align="right">
 
-                <EditDialog test={test} fetch_test_mutation={fetch_test_mutation} />
+                  <Button onClick={() => {
+                    handleSave(test)
+                  }}>
+                    削除
+                  </Button>
 
-              </TableCell>
-            </TableRow>
-          ))}
+                  <EditDialog test={test} fetch_test_mutation={fetch_test_mutation} />
+
+                </TableCell>
+              </TableRow>
+            )
+          }
+          )}
         </TableBody>
       </Table>
     </TableContainer>

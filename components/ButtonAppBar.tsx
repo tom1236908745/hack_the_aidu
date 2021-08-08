@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const classes = useStyles()
 
   return (
@@ -45,7 +45,7 @@ export default function ButtonAppBar() {
           hack the aidu
         </Typography>
         <div className={classes.buttons}>
-          <NewSubjectDialog/>
+          <NewSubjectDialog subjects_remove={props.subjects_remove}/>
           <span className={classes.spaceRight} />
           <NewTestDialog />
         </div>
