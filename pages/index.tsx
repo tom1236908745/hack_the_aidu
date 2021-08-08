@@ -198,7 +198,7 @@ export default function Home() {
               )
             })
           } */}
-          <DataTable test={tests} />
+          <DataTable test={tests} fetch_test_mutation={fetch_test_mutation} />
         </main>
 
       </div>

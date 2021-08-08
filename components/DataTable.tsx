@@ -29,10 +29,11 @@ const useStyles = makeStyles({
 // ];
 
 export interface data_table_type {
-  test: any
+  test: any,
+  fetch_test_mutation: any
 }
 
-export const DataTable = ({ test }: data_table_type) => {
+export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
 
 
   const classes = useStyles();
@@ -44,7 +45,7 @@ export const DataTable = ({ test }: data_table_type) => {
             <TableCell align="right">年度</TableCell>
             <TableCell align="right">更新日</TableCell>
             <TableCell align="right">リンク</TableCell>
-            
+
 
           </TableRow>
         </TableHead>
@@ -57,7 +58,7 @@ export const DataTable = ({ test }: data_table_type) => {
                 <a href={test.file_url}>{test.file_url}</a>
               </TableCell>
               <TableCell align="right">
-              <EditDialog test={test} />
+                <EditDialog test={test} fetch_test_mutation={fetch_test_mutation} />
               </TableCell>
             </TableRow>
           ))}

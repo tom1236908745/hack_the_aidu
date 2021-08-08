@@ -90,6 +90,7 @@ export default function NewDialogs() {
           編集
         </DialogTitle>
         <DialogContent dividers>
+
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
