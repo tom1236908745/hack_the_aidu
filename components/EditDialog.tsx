@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query'
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,6 +9,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import { test_fix } from '../apis/test_fix'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -56,42 +58,49 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs() {
-  const [open, setOpen] = React.useState(false);
+
+export default function EditDialogs(props) {
+  const [open, setOpen] = useState(false);
+  const [newUrl, setNewUrl] = useState('');
+  const {
+    mutate: post_test_mutation,
+    isLoading: mutateIsLoading
+  } = useMutation((data: any) => test_fix(data), {
+    onSuccess: () => {
+      props.fetch_test_mutation()
+      
+    },
+    onError: () => {
+      alert("failed")
+    }
+  })
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleSave = () => {
+    let new_test = Object.assign({}, props.test)
+    new_test.file_url = newUrl
+    post_test_mutation(new_test)
+    console.log(props.test.file_url)
     setOpen(false);
   };
 
+  const handleUrl = e => setNewUrl(e.target.value);
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
-        新規作成
+        編集
       </Button>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+      <Dialog onClose={() => setOpen(false)} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}>
+          リンク編集
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
-          </Typography>
+          <input value={newUrl} onChange={handleUrl} placeholder={props.test.file_url} />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={handleSave} color="primary">
             Save changes
           </Button>
         </DialogActions>

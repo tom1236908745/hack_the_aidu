@@ -3,6 +3,6 @@ import db from "./firebase";
 
 export const test_post = async (test_obj: test_object) => {
 
-    const res = await db.collection('test').add(test_obj)
+     const res = await db.collection('test').add(test_obj)
 
 }
