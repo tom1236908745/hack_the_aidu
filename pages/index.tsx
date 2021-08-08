@@ -14,7 +14,7 @@ import { test_get } from '../apis/test_get'
 import { test_object } from '../interfaces/test_get_type'
 import { useRouter } from 'next/router'
 
-export const goRouter = () => {
+export const GoRouter = () => {
 
   const [goPath, setGoPath] = useState<string>(null)
 
@@ -43,7 +43,7 @@ export default function Home() {
 
   const [tests, setTest] = useState<any>([])
 
-  const setGo = goRouter()
+  const setGo = GoRouter()
 
   // react query
 
