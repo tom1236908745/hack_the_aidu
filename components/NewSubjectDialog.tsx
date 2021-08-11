@@ -9,6 +9,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import Box from "@material-ui/core/Box";
 import { subject_patch } from '../apis/subjects_post'
 
 const styles = (theme: Theme) =>
@@ -89,22 +90,33 @@ export default function NewSubjectDialogs(props) {
     setOpen(false)
   };
   const handlerSubject = e => setNew_subject_data(e.target.value);
+  const handleClose = () => {
+    setOpen(false);
+  }
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
         科目追加
       </Button>
       <Dialog onClose={() => setOpen(false)} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}>
+        <DialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}　>
           科目追加
         </DialogTitle>
-        <DialogContent dividers>
-          <h3> 科目</h3>
-          <input value={new__subject_data} onChange={handlerSubject} />
-        </DialogContent>
+        
+          <DialogContent dividers>
+          <Box mx={5} mb={5}>
+            <h3> 科目</h3>
+            <input value={new__subject_data} onChange={handlerSubject} />
+            </Box>
+          </DialogContent>
+        
+        
         <DialogActions>
           <Button autoFocus onClick={handleSave} color="primary">
             保存
+          </Button>
+          <Button autoFocus onClick={handleClose} color="primary">
+            閉じる
           </Button>
         </DialogActions>
       </Dialog>

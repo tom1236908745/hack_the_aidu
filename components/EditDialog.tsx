@@ -36,11 +36,6 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
     </MuiDialogTitle>
   );
 });
@@ -85,7 +80,9 @@ export default function EditDialogs(props) {
     console.log(props.test.file_url)
     setOpen(false);
   };
-
+  const handleClose = () => {
+    setOpen(false);
+  }
   const handleUrl = e => setNewUrl(e.target.value);
   return (
     <div>
@@ -101,7 +98,10 @@ export default function EditDialogs(props) {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleSave} color="primary">
-            Save changes
+            保存
+          </Button>
+          <Button autoFocus onClick={handleClose} color="primary">
+            閉じる
           </Button>
         </DialogActions>
       </Dialog>
