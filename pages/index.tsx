@@ -106,10 +106,10 @@ export default function Home() {
               <div className={styles.flexercol}>
                 <div className={styles.textcenter}>
                   <div className={styles.ml}>
-                    教科選択
+                    科目選択
                   </div>
                 </div>
-                <SelectLabels value={search__subject_data} items={subject} name="教科" onChange={(e) => setSearch_subject_data(e.target.value)} />
+                <SelectLabels value={search__subject_data} items={subject} name="科目" onChange={(e) => setSearch_subject_data(e.target.value)} />
               </div>
             </div>
 
