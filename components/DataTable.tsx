@@ -15,6 +15,15 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  link: {
+    color: "red",
+      '&:hover': {
+        color: "yellow",
+      },
+      '&:active': {
+        color: "green",
+      },
+  }
 });
 
 // function createData(nendo: number, subject: string, field: string, kind: string, url: string, insert_data: string) {
@@ -70,14 +79,15 @@ export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
         </TableHead>
         <TableBody>
           {test.map((test) => {
-            const timeStamp = test.insert_date.toDate()
-            const formatTime = `${timeStamp.getFullYear()}/${timeStamp.getMonth()+1}/${timeStamp.getDate()}`
+            const link = test.file_url.slice(0,30) + '...'
             if (!test.delete_flg) return (
               <TableRow key={test.insert_date}>
                 <TableCell align="right">{test.nendo}</TableCell>
-                <TableCell align="right">{formatTime}</TableCell>
+                <TableCell align="right">{test.insert_date.toString()}</TableCell>
                 <TableCell align="right">
-                  <a href={test.file_url}>{test.file_url}</a>
+                  <Button className={classes.link}>
+                    <a href={test.file_url}>{link}</a>
+                  </Button>
                 </TableCell>
                 <TableCell align="right">
 
