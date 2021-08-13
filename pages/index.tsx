@@ -58,7 +58,6 @@ export default function Home() {
 
   const {
     mutate: fetch_test_mutation,
-    isLoading: mutateIsLoading
   } = useMutation((_) => test_get(search__subject_data, search__field_data, search__type_data), {
     onSuccess: (res) => {
       // // メインページに遷移
