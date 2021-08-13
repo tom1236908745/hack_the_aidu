@@ -233,11 +233,11 @@ export default function NewTestDialog() {
             />
           </Box>
           <Box mx={5} mb={5}>
-            <h3> 教科</h3>
+            <h3> 科目</h3>
             <SelectLabels
               value={select__subject_data}
               items={subject}
-              name="教科"
+              name="科目"
               onChange={(e) => setSelect_subject_data(e.target.value)}
             />
           </Box>
