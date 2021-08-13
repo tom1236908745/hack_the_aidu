@@ -71,7 +71,7 @@ export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
         <TableBody>
           {test.map((test) => {
             const timeStamp = test.insert_date.toDate()
-            const formatTime = `${timeStamp.getFullYear()}/${timeStamp.getMonth()+1}/${timeStamp.getDate()} ${timeStamp.getHours()}:${timeStamp.getMinutes()}:${timeStamp.getSeconds()}`
+            const formatTime = `${timeStamp.getFullYear()}/${timeStamp.getMonth()+1}/${timeStamp.getDate()}`
             if (!test.delete_flg) return (
               <TableRow key={test.insert_date}>
                 <TableCell align="right">{test.nendo}</TableCell>
