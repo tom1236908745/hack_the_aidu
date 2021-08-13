@@ -70,10 +70,12 @@ export const DataTable = ({ test, fetch_test_mutation }: data_table_type) => {
         </TableHead>
         <TableBody>
           {test.map((test) => {
+            const timeStamp = test.insert_date.toDate()
+            const formatTime = `${timeStamp.getFullYear()}/${timeStamp.getMonth()+1}/${timeStamp.getDate()} ${timeStamp.getHours()}:${timeStamp.getMinutes()}:${timeStamp.getSeconds()}`
             if (!test.delete_flg) return (
               <TableRow key={test.insert_date}>
                 <TableCell align="right">{test.nendo}</TableCell>
-                <TableCell align="right">{test.insert_date.toString()}</TableCell>
+                <TableCell align="right">{formatTime}</TableCell>
                 <TableCell align="right">
                   <a href={test.file_url}>{test.file_url}</a>
                 </TableCell>
