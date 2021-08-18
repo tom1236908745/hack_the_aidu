@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import * as admin from "firebase-admin"
 import 'firebase/firestore'
+import 'firebase/auth'
 
 const firebaseConfig = {
     apiKey: "AIzaSyDdKWZ0wud1-kYGGGCp5wmCwCS4TX6Vfvo",
@@ -23,4 +24,5 @@ else {
     db = firebase.firestore()
 }
 
+export const auth = firebase.auth()
 export default db
