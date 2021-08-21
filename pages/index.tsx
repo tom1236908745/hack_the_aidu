@@ -11,7 +11,7 @@ import { Button } from "@material-ui/core";
 import { test_post } from "../apis/test_post";
 import { test_get } from "../apis/test_get";
 import { test_object } from "../interfaces/test_get_type";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import DataTable from "../components/DataTable";
 import { auth } from "../apis/firebase";
 
