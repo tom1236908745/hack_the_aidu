@@ -20,6 +20,7 @@ import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import { test_object } from "../interfaces/test_get_type";
 import { test_post } from "../apis/test_post";
+import { buttonStyles } from '../components/layout';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -70,35 +71,10 @@ const CssTextField = withStyles({
   
 })(TextField);
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    textForm: {
-      "& label.Mui-focused": {
-        color: "green",
-      },
-      "& .MuiInput-underline:after": {
-        borderBottomColor: "green",
-      },
-      "& .MuiOutlinedInput-root": {
-        "& fieldset": {
-          borderColor: "red",
-        },
-        "&:hover fieldset": {
-          borderColor: "yellow",
-        },
-        "&.Mui-focused fieldset": {
-          borderColor: "green",
-        },
-      },
-    },
-    color: {
-      color: theme.palette.grey[800],
-    },
-  })
-);
+
 
 export default function NewTestDialog() {
-  const classes = useStyles();
+  const classes = buttonStyles();
 
   var test: test_object = {
     file_url: "",

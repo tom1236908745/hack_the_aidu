@@ -1,0 +1,22 @@
+.rapper {
+    margin-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.bottomSpace {
+  margin-bottom: 2rem;
+}
+.items {
+  margin-top: 3rem;
+  justify-content: center;
+}
+.flow {
+  margin-top: 3rem;
+  justify-content: center;
+  display: flex;
+}
+.thinFont {
+  font-weight: lighter;
+}
