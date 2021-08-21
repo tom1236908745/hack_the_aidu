@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import { buttonStyles } from "../components/layout";
+import style from "../styles/Form.module.css";
 
 export default function SignUp() {
   const router = useRouter();
@@ -24,10 +25,10 @@ export default function SignUp() {
 
   const classes = buttonStyles();
   return (
-    <div>
-      <p>サインアップ画面</p>
-      <Box mx={5} mb={3}>
-        <h3>Eメールを入力して下さい</h3>
+    <div className={style.rapper}>
+      <h3 className={style.title}>サインアップ画面</h3>
+      <Box mt={4}>
+        <p>Eメール</p>
         <TextField
           className={classes.textForm}
           variant="outlined"
@@ -35,10 +36,12 @@ export default function SignUp() {
           value={email}
           name="url"
           onChange={(e) => setEmail(e.target.value)}
+          label="input email"
+          defaultValue="email"
         />
       </Box>
-      <Box mx={5} mb={3}>
-        <h3>パスワードを入力して下さい</h3>
+      <Box>
+        <p>パスワード</p>
         <TextField
           className={classes.textForm}
           variant="outlined"
@@ -46,16 +49,22 @@ export default function SignUp() {
           value={password}
           name="url"
           onChange={(e) => setPassword(e.target.value)}
+          label="password"
+          defaultValue="password"
         />
       </Box>
-      <br />
-      <br />
-      <Button autoFocus onClick={signup} color="primary">
-        サインアップ
-      </Button>
-      <Button autoFocus onClick={back} color="primary">
-        戻る
-      </Button>
+      <Box mt={6} className={style.flow}>
+        <Button variant="contained" onClick={signup} color="primary">
+          送信
+        </Button>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <Button variant="contained" onClick={back} color="primary">
+          戻る
+        </Button>
+      </Box>
+      
     </div>
   );
 }

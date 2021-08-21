@@ -8,11 +8,11 @@ export const buttonStyles = makeStyles((theme: Theme) =>
         color: "green",
       },
       "& .MuiInput-underline:after": {
-        borderBottomColor: "green",
+        borderBottomColor: "#4050B5",
       },
       "& .MuiOutlinedInput-root": {
         "& fieldset": {
-          borderColor: "red",
+          borderColor: "#4050B5",
         },
         "&:hover fieldset": {
           borderColor: "yellow",
