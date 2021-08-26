@@ -10,7 +10,11 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import { test_fix } from '../apis/test_fix'
+import RainbowTextField from "./RainbowTextField";
 
+interface HTMLButtonEvent extends Event {
+  target: HTMLButtonElement;
+}
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -83,7 +87,7 @@ export default function EditDialogs(props) {
   const handleClose = () => {
     setOpen(false);
   }
-  const handleUrl = e => setNewUrl(e.target.value);
+  const handlerUrl = (e:HTMLButtonEvent) => setNewUrl(e.target.value);
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
@@ -94,7 +98,11 @@ export default function EditDialogs(props) {
           リンク編集
         </DialogTitle>
         <DialogContent dividers>
-          <input value={newUrl} onChange={handleUrl} placeholder={props.test.file_url} />
+        <RainbowTextField
+              label="input url"
+              value={newUrl}
+              handleFunc={handlerUrl}
+            />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleSave} color="primary">

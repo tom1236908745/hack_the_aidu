@@ -17,10 +17,14 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
 import { test_object } from "../interfaces/test_get_type";
 import { test_post } from "../apis/test_post";
-import { buttonStyles } from '../components/layout';
+import { buttonStyles } from './laylout';
+import RainbowTextField from "./RainbowTextField";
+
+interface HTMLButtonEvent extends Event {
+  target: HTMLButtonElement;
+}
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -64,14 +68,6 @@ const DialogActions = withStyles((theme: Theme) => ({
     padding: theme.spacing(1),
   },
 }))(MuiDialogActions);
-
-// input form
-
-const CssTextField = withStyles({
-  
-})(TextField);
-
-
 
 export default function NewTestDialog() {
   const classes = buttonStyles();
@@ -157,7 +153,8 @@ export default function NewTestDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  
+  const handlerUrl = (e:HTMLButtonEvent) => setSelect_fileUrl(e.target.value);
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
@@ -178,14 +175,10 @@ export default function NewTestDialog() {
         <DialogContent dividers>
           <Box mx={5} mb={3}>
             <h3> URL</h3>
-            <TextField
-              className={classes.textForm}
-              label="urlを入力して下さい"
-              variant="outlined"
-              id="custom-css-outlined-input"
+            <RainbowTextField
+              label="input url"
               value={select__fileUrl}
-              name="url"
-              onChange={(e) => setSelect_fileUrl(e.target.value)}
+              handleFunc={handlerUrl}
             />
           </Box>
           <Box mx={5} mb={3}>
