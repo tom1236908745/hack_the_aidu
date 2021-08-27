@@ -42,7 +42,7 @@ export default function RainbowTextBox(props) {
           className={classes.textForm}
           label={props.label}
           variant="outlined"
-          id="custom-css-outlined-input"
+          id="custom-css-outlined-input-first"
           value={props.value}
           type={props.type}
           onChange={props.handleFunc}
@@ -59,7 +59,7 @@ export default function RainbowTextBox(props) {
             className={classes.textForm}
             label={props.label2}
             variant="outlined"
-            id="custom-css-outlined-input"
+            id="custom-css-outlined-input-second"
             value={props.value2}
             type={props.type2}
             onChange={props.handleFunc2}
