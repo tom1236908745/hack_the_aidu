@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import {
   createStyles,
@@ -18,7 +18,7 @@ import Box from "@material-ui/core/Box";
 import { subject_patch } from "../apis/subjects_post";
 import RainbowTextField from "./RainbowTextField";
 
-const styles = (theme: Theme) =>
+const styles = (theme: Theme) => 
   createStyles({
     root: {
       margin: 0,
@@ -32,6 +32,9 @@ const styles = (theme: Theme) =>
     },
   });
 
+interface HTMLButtonEvent extends Event {
+  target: HTMLButtonElement;
+}
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
   children: React.ReactNode;
@@ -70,7 +73,6 @@ const DialogActions = withStyles((theme: Theme) => ({
 }))(MuiDialogActions);
 
 export default function NewSubjectDialogs(props) {
-
   const [new__subject_data, setNew_subject_data] = useState<string>("");
   const queryClient = useQueryClient();
 
@@ -95,7 +97,25 @@ export default function NewSubjectDialogs(props) {
     new__subject_data !== "" && new_field_mutation(new__subject_data);
     setOpen(false);
   };
-  const handlerSubject = (e) => setNew_subject_data(e.target.value);
+  // validation
+  const inputRef = useRef(null);
+  const [inputError, setInputError] = useState(false);
+
+  const handleChange = () => {
+    if (inputRef.current) {
+      const ref = inputRef.current;
+      if (!ref.validity.valid) {
+        setInputError(true);
+      } else {
+        console.log(ref.validity.valid);
+        setInputError(false);
+      }
+    }
+  };
+  const handlerSubject = (e: HTMLButtonEvent) => {
+    setNew_subject_data(e.target.value);
+    handleChange
+  }
   const handleClose = () => {
     setOpen(false);
   };
@@ -122,6 +142,7 @@ export default function NewSubjectDialogs(props) {
               label="input subject"
               value={new__subject_data}
               handleFunc={handlerSubject}
+              type="text"
             />
           </Box>
         </DialogContent>

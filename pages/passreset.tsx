@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { auth } from "../apis/firebase";
 import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
@@ -35,7 +35,27 @@ export default function SignUp() {
       alert(err);
     }
   };
-  const handlerEmail = (e: HTMLButtonEvent) => setEmail(e.target.value);
+  // validation
+  const inputRef = useRef(null);
+  const [inputError, setInputError] = useState(false);
+
+  const handleChange = () => {
+    if (inputRef.current) {
+      const ref = inputRef.current;
+      if (!ref.validity.valid) {
+        setInputError(true);
+      } else {
+        console.log(ref.validity.valid);
+        setInputError(false);
+      }
+    }
+  };
+
+  const handlerEmail = (e: HTMLButtonEvent) => {
+    setEmail(e.target.value);
+    handleChange();
+  };
+
   const back = () => router.push("/login");
   return (
     <div className={style.rapper}>
@@ -44,9 +64,14 @@ export default function SignUp() {
         <p className={style.bottomSpace}>Eメール</p>
 
         <RainbowTextField
+          error={inputError}
+          inputProps={{ required: true }}
+          inputRef={inputRef}
+          helperText={inputRef?.current?.validationMessage}
           label="input email"
           value={email}
           handleFunc={handlerEmail}
+          type="email"
         />
       </Box>
       <Box mt={6} className={style.flow}>

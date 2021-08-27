@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useMutation, useQuery } from "react-query";
 import {
   createStyles,
@@ -19,7 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { test_object } from "../interfaces/test_get_type";
 import { test_post } from "../apis/test_post";
-import { buttonStyles } from './laylout';
+import { buttonStyles } from "./laylout";
 import RainbowTextField from "./RainbowTextField";
 
 interface HTMLButtonEvent extends Event {
@@ -153,8 +153,25 @@ export default function NewTestDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  
-  const handlerUrl = (e:HTMLButtonEvent) => setSelect_fileUrl(e.target.value);
+  // validation
+  const inputRef = useRef(null);
+  const [inputError, setInputError] = useState(false);
+
+  const handleChange = () => {
+    if (inputRef.current) {
+      const ref = inputRef.current;
+      if (!ref.validity.valid) {
+        setInputError(true);
+      } else {
+        console.log(ref.validity.valid);
+        setInputError(false);
+      }
+    }
+  };
+  const handlerUrl = (e: HTMLButtonEvent) => {
+    setSelect_fileUrl(e.target.value);
+    handleChange();
+  };
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
@@ -176,9 +193,14 @@ export default function NewTestDialog() {
           <Box mx={5} mb={3}>
             <h3> URL</h3>
             <RainbowTextField
+              error={inputError}
+              inputProps={{ required: true }}
+              inputRef={inputRef}
+              helperText={inputRef?.current?.validationMessage}
               label="input url"
               value={select__fileUrl}
               handleFunc={handlerUrl}
+              type="url"
             />
           </Box>
           <Box mx={5} mb={3}>

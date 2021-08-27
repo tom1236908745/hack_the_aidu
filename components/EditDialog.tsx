@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef  } from 'react';
 import { useMutation, useQueryClient } from 'react-query'
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -87,7 +87,26 @@ export default function EditDialogs(props) {
   const handleClose = () => {
     setOpen(false);
   }
-  const handlerUrl = (e:HTMLButtonEvent) => setNewUrl(e.target.value);
+
+  // validation
+  const inputRef = useRef(null);
+  const [inputError, setInputError] = useState(false);
+
+  const handleChange = () => {
+    if (inputRef.current) {
+      const ref = inputRef.current;
+      if (!ref.validity.valid) {
+        setInputError(true);
+      } else {
+        console.log(ref.validity.valid);
+        setInputError(false);
+      }
+    }
+  };
+  const handlerUrl = (e:HTMLButtonEvent) => {
+    setNewUrl(e.target.value);
+    handleChange()
+  }
   return (
     <div>
       <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
@@ -99,9 +118,14 @@ export default function EditDialogs(props) {
         </DialogTitle>
         <DialogContent dividers>
         <RainbowTextField
+        error={inputError}
+        inputProps={{ minLength: 6, required: true }}
+        inputRef={inputRef}
+        helperText={inputRef?.current?.validationMessage}
               label="input url"
               value={newUrl}
               handleFunc={handlerUrl}
+              type="url"
             />
         </DialogContent>
         <DialogActions>

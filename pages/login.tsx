@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { auth } from "../apis/firebase";
 import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
@@ -11,7 +11,6 @@ interface HTMLButtonEvent extends Event {
 }
 
 export default function Login() {
-  
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -34,28 +33,65 @@ export default function Login() {
   const signUp = () => router.push("/signup");
   const resetPassword = () => router.push("/passreset");
 
-  const handlerEmail = (e:HTMLButtonEvent) => setEmail(e.target.value);
-  const handlerPassword = (e:HTMLButtonEvent) => setPassword(e.target.value);
+  // validation
+  const inputRef = useRef(null);
+  const [inputError, setInputError] = useState(false);
+
+  const inputRef2 = useRef(null);
+  const [inputError2, setInputError2] = useState(false);
+  
+  const handleChange = () => {
+    if (inputRef.current) {
+      const ref = inputRef.current;
+      if (!ref.validity.valid) {
+        setInputError(true);
+      } else {
+        console.log(ref.validity.valid);
+        setInputError(false);
+      }
+    }
+  };
+
+  const handleChange2 = () => {
+    if (inputRef2.current) {
+      const ref2 = inputRef2.current;
+      if (!ref2.validity.valid) {
+        setInputError2(true);
+      } else {
+        setInputError2(false);
+      }
+    }
+  };
+  const handlerEmail = (e: HTMLButtonEvent) => {
+    setEmail(e.target.value);
+    handleChange();
+  };
+  const handlerPassword = (e: HTMLButtonEvent) => {
+    setPassword(e.target.value);
+    handleChange2();
+  };
   return (
     <div className={style.rapper}>
       <h3 className={style.title}>ログイン画面</h3>
-
-      <Box mt={4}>
-        <p>Eメール</p>
-        <RainbowTextField
-              label="input url"
-              value={email}
-              handleFunc={handlerEmail}
-            />
-      </Box>
-      <Box>
-        <p>パスワード</p>
-        <RainbowTextField
-              label="input password"
-              value={password}
-              handleFunc={handlerPassword}
-            />
-      </Box>
+      <RainbowTextField
+          text="Eメール"
+          error={inputError}
+          inputRef={inputRef}
+          helperText={inputRef?.current?.validationMessage}
+          label="input email"
+          value={email}
+          handleFunc={handlerEmail}
+          type="email"
+          text2="パスワード"
+          error2={inputError2}
+          inputRef2={inputRef2}
+          inputProps2={{ minLength: 6, required:true}}
+          helperText2={inputRef2?.current?.validationMessage}
+          label2="input password"
+          value2={password}
+          handleFunc2={handlerPassword}
+          type2="password"
+        />
       <Box mt={6}>
         <Button variant="contained" onClick={login} color="primary">
           ログイン
