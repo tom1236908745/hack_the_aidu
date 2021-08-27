@@ -5,23 +5,31 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import style from "../styles/Form.module.css";
 import RainbowTextField from "../components/RainbowTextField";
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
+import ClearIcon from '@material-ui/icons/Clear';
 
 interface HTMLButtonEvent extends Event {
   target: HTMLButtonElement;
 }
+
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const login = () => {
-    try {
-      auth.signInWithEmailAndPassword(email, password);
-      router.push("/");
-    } catch (err) {
-      alert(err);
-    }
+  
+  const login = async () => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        router.push("/");
+      })
+      .catch((err) => {
+        handleOpen()
+        console.log(err)
+      });
   };
   useEffect(() => {
     auth.onAuthStateChanged((user: any) => {
@@ -39,7 +47,7 @@ export default function Login() {
 
   const inputRef2 = useRef(null);
   const [inputError2, setInputError2] = useState(false);
-  
+
   const handleChange = () => {
     if (inputRef.current) {
       const ref = inputRef.current;
@@ -70,28 +78,59 @@ export default function Login() {
     setPassword(e.target.value);
     handleChange2();
   };
+
+  // error messafe
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false)
+  };
+  
+  function Transition(props) {
+    return <Slide {...props} direction="left" />;
+  }
   return (
     <div className={style.rapper}>
+      
+      <Snackbar
+        open={open}
+        message="メールアドレス、パスワードを確認して下さい 🤒"
+        onClose={handleClose}
+        TransitionComponent={Transition}
+        anchorOrigin={{
+          horizontal: 'right',
+          vertical: 'top',
+        }}
+        transitionDuration={{
+          enter: 800,
+          exit: 800,
+        }}
+        action={<ClearIcon onClick={handleClose}/>}
+      />
       <h3 className={style.title}>ログイン画面</h3>
       <RainbowTextField
-          text="Eメール"
-          error={inputError}
-          inputRef={inputRef}
-          helperText={inputRef?.current?.validationMessage}
-          label="input email"
-          value={email}
-          handleFunc={handlerEmail}
-          type="email"
-          text2="パスワード"
-          error2={inputError2}
-          inputRef2={inputRef2}
-          inputProps2={{ minLength: 6, required:true}}
-          helperText2={inputRef2?.current?.validationMessage}
-          label2="input password"
-          value2={password}
-          handleFunc2={handlerPassword}
-          type2="password"
-        />
+        text="Eメール"
+        error={inputError}
+        inputRef={inputRef}
+        helperText={inputRef?.current?.validationMessage}
+        label="input email"
+        value={email}
+        handleFunc={handlerEmail}
+        type="email"
+        text2="パスワード"
+        error2={inputError2}
+        inputRef2={inputRef2}
+        inputProps2={{ minLength: 6, required: true }}
+        helperText2={inputRef2?.current?.validationMessage}
+        label2="input password"
+        value2={password}
+        handleFunc2={handlerPassword}
+        type2="password"
+      />
+
       <Box mt={6}>
         <Button variant="contained" onClick={login} color="primary">
           ログイン
