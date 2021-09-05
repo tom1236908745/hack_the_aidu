@@ -13,7 +13,6 @@ interface HTMLButtonEvent extends Event {
   target: HTMLButtonElement;
 }
 
-
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
